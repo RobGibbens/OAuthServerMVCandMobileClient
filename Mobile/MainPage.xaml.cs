@@ -74,7 +74,7 @@ namespace ComicBook
 		{
 			try
 			{
-				var request = new CustomOAuth2Request("GET", ServerInfo.ApiEndpoint, null, account, true);
+				var request = new OAuth2Request("GET", ServerInfo.ApiEndpoint, null, account);
                    
 				var response = await request.GetResponseAsync();
 

@@ -20,15 +20,15 @@ namespace WebApiOauth
 
         private void ConfigureAuth(IAppBuilder app)
         {
-            //app.Use(async (context, next) =>
-            //{
-            //    var token = HttpUtility.ParseQueryString(context.Request.QueryString.Value).Get("access_token");
+            app.Use(async (context, next) =>
+            {
+                var token = HttpUtility.ParseQueryString(context.Request.QueryString.Value).Get("access_token");
 
-            //    if (! string.IsNullOrWhiteSpace(token))
-            //        context.Request.Headers.Add("Authorization", new []{ $"Bearer {token}"});
+                if (!string.IsNullOrWhiteSpace(token))
+                    context.Request.Headers.Add("Authorization", new[] { $"Bearer {token}" });
 
-            //    await next.Invoke();
-            //});
+                await next.Invoke();
+            });
 
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
         }
